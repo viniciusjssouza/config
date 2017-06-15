@@ -2,6 +2,9 @@
 #
 # Script for creating the development and test databases
 # and giving full access to a new user which will manage them.
+#
+# The new user name is the same of the project.
+# The user password is 'test123'.
 #########################################################################
 
 function read_input {
