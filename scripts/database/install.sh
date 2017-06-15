@@ -17,14 +17,18 @@ function read_input {
   echo ""
 }
 
+function exec_db_command {
+  mysql --user="root" --password="$password" --execute="$1"
+}
+
 function create_database {
   echo "Creating the database $1"
-  mysql --user="root" --password="$password" --execute="CREATE DATABASE $1;"
-  mysql --user="root" --password="$password" --execute="GRANT ALL PRIVILEGES ON $1.* TO '$name'@'localhost';"
+  exec_db_command "CREATE DATABASE $1;"
+  exec_db_command "GRANT ALL PRIVILEGES ON $1.* TO '$name'@'localhost';"
 }
 
 function create_user {
-  mysql --user="root" --password="$password" --execute="CREATE USER '${name}'@'localhost' IDENTIFIED BY 'test123';"
+  exec_db_command "CREATE USER '${name}'@'localhost' IDENTIFIED BY 'test123';"
 }
 
 read_input
