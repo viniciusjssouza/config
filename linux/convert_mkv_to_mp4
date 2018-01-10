@@ -1,0 +1,7 @@
+#!/bin/bash
+# Convert all the MKV files inside the current working directory to MP4.
+# 
+
+for i in *.mkv; do
+    ffmpeg -i "$i" -codec copy "${i%.*}.mp4"
+done
