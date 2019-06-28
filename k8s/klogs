@@ -1,0 +1,8 @@
+#/bin/bash
+# Access the current logs  of the provided POD
+#
+# Parameter 1: the app name, which should match the deployment name (<app name>-deployment) and the container name.
+
+POD_NAME=$(kubectl get pods -n stock  --no-headers -o custom-columns=":metadata.name" | grep -m1 "$1-deployment") 
+echo "Acessing pod $POD_NAME"
+kubectl logs "$POD_NAME" -n stock -c "$1" --follow
