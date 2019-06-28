@@ -1,0 +1,7 @@
+#/bin/bash
+# run a shell inside a running POD
+# Paramenter 1: the name of the "app". The deployment should match <app_name>-deployment and the container must have the 
+#               app name. 
+POD_NAME=$(kubectl get pods -n stock  --no-headers -o custom-columns=":metadata.name" | grep -m1 "$1-deployment") 
+echo "Acessing pod $POD_NAME"
+kubectl exec -it "$POD_NAME" -n stock -c "$1" -- sh
